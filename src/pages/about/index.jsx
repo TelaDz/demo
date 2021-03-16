@@ -1,21 +1,38 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from 'antd'
+import { Button, Table } from 'antd'
 
-const About = (props) => {
-    console.log('About',props);
-    return <>About <br /> <Link to='/'>home</Link>
-        <br />
-        <Button onClick={() => {
-            props.history.push('/about?1234123')
-        }}>Button</Button>
-        <br />
-        <Button onClick={() => {
-            props.history.push({
-                pathname: '/',
-                state: '123'
-            })
-        }}>Button</Button>
-    </>
+const About = props => {
+    console.log('About', props)
+    const columns = [
+        {
+            title: '序号',
+            dataIndex: 'key'
+        }
+    ]
+    const dataSource = [
+        {
+            key: 0,
+            name: 'Jack'
+        }
+    ]
+    return (
+        <>
+            <Table columns={columns} dataSource={dataSource}></Table>
+            <Button
+                onClick={() => {
+                    props.history.go(-1)
+                }}
+            >
+                返回
+            </Button>
+            <Button
+                onClick={() => {
+                    props.history.push('/')
+                }}
+            >
+                Home
+            </Button>
+        </>
+    )
 }
 export default About

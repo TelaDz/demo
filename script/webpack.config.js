@@ -9,9 +9,8 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist'),
         hot: true,
         open: true,
-        // historyApiFallback: true,
-        // compress: true,
-        // inline:true
+        historyApiFallback: true,
+        compress: true
     },
     devtool: 'source-map',
     output: {
@@ -68,10 +67,10 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'src': resolve('src'),
-            '_c': resolve('src/components'),
-            'pages': resolve('src/pages'),
-            'utils': resolve('src/utils'),
+            src: resolve('src'),
+            _c: resolve('src/components'),
+            pages: resolve('src/pages'),
+            utils: resolve('src/utils')
         },
         // 需要打包的文件后缀
         extensions: ['.js', '.jsx']

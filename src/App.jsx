@@ -12,24 +12,17 @@ const { Header, Content, Sider } = Layout
 const App = props => {
     console.log(props)
     return (
-        <Layout style={{ minHeight: 'inherit' }}>
-            <Header className="header">
-                <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                    <Menu.Item key="1">
-                        <Link to="/">home </Link>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <Link to="/other">nav 2</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <Link to="/about">about</Link>
-                    </Menu.Item>
-                </Menu>
-            </Header>
+        <Layout style={{ height: '100vh' }}>
+            <Header className="header"></Header>
             <Layout>
                 <Sider
                     width={200}
+                    style={{
+                        height: '100vh',
+                        overflow: 'auto',
+                        position: 'fixed',
+                        left: 0
+                    }}
                     breakpoint="lg"
                     collapsedWidth="0"
                     className="site-layout-background"
@@ -41,10 +34,18 @@ const App = props => {
                         style={{ height: '100%', borderRight: 0 }}
                     >
                         <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                            <Menu.Item key="1">option1</Menu.Item>
-                            <Menu.Item key="2">option2</Menu.Item>
-                            <Menu.Item key="3">option3</Menu.Item>
-                            <Menu.Item key="4">option4</Menu.Item>
+                            <Menu.Item key="1">
+                                <Link to="/">home</Link>{' '}
+                            </Menu.Item>
+                            <Menu.Item key="2">
+                                <Link to="/other">other</Link>{' '}
+                            </Menu.Item>
+                            <Menu.Item key="3">
+                                <Link to="/about">about</Link>{' '}
+                            </Menu.Item>
+                            <Menu.Item key="4">
+                                <Link to="/">option4</Link>{' '}
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
                             <Menu.Item key="5">option5</Menu.Item>
@@ -60,7 +61,7 @@ const App = props => {
                         </SubMenu>
                     </Menu>
                 </Sider>
-                <Layout style={{ padding: '0 24px 24px' }}>
+                <Layout style={{ padding: '0 24px 24px', marginLeft: 200 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>

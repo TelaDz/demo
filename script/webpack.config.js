@@ -17,12 +17,11 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: ['babel-loader', 'astroturf/loader'],
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
+        test: /\.(css|less)$/,
         use: [
           {
             loader: 'style-loader'
@@ -33,14 +32,6 @@ module.exports = {
               importLoaders: 1
             }
           },
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
           {
             loader: 'less-loader',
             options: {

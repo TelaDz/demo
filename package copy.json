@@ -12,6 +12,10 @@
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
+  "pre-commit": [
+    "precommit",
+    "precommit-msg"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

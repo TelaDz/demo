@@ -2,17 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const resolve = dir => require('path').join(__dirname, dir)
 module.exports = {
   entry: './src/index.js',
-  devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
-    hot: true,
-    open: true,
-    historyApiFallback: true,
-    compress: true
-  },
-  devtool: 'source-map',
   output: {
     // 指定打包后输出的文件名
     filename: 'js/[name].[contenthash:10].js',
@@ -24,11 +17,12 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        use: ['babel-loader', 'astroturf/loader'],
         exclude: /node_modules/
       },
       {
-        test: /\.(css|less)$/,
+        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'style-loader'
@@ -39,6 +33,14 @@ module.exports = {
               importLoaders: 1
             }
           },
+          {
+            loader: 'postcss-loader'
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
           {
             loader: 'less-loader',
             options: {
@@ -62,8 +64,12 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ title: 'demo', template: 'public/index.html' }),
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProgressPlugin()
+    new webpack.ProgressPlugin(),
+    // new ExtractTextPlugin('css/index.css'),
+    //提供全局的变量，在模块中使用无需用require引入
+    new webpack.ProvidePlugin({
+      React: 'react'
+    })
   ],
   resolve: {
     alias: {

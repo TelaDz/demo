@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build:dll": "webpack --config build/webpack.dll.conf.js"
+  }
+}

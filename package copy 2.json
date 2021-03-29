@@ -8,6 +8,7 @@
     "start": "cross-env ENV_LWD=development webpack serve --mode=development --config script/webpack.config.dev.js",
     "build": "cross-env ENV_LWD=production webpack --mode=production --config script/webpack.config.pro.js",
     "serve": "npx serve -s dist",
+    "lint:css": "stylelint --aei .less .css src",
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
@@ -71,6 +72,11 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix",
       "prettier --write",
       "git add"
     ]

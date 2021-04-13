@@ -8,11 +8,8 @@
     "start": "cross-env ENV_LWD=development webpack serve --mode=development --config script/webpack.config.dev.js",
     "build": "cross-env ENV_LWD=production webpack --mode=production --config script/webpack.config.pro.js",
     "serve": "npx serve -s dist",
-<<<<<<< HEAD
     "mock": "node mock/index.js",
     "lint:css": "stylelint --aei .less .css src",
-=======
->>>>>>> da1b8836c3f5497cf1c7b3086fbb2991d0d4de7d
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },

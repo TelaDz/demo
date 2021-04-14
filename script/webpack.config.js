@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const resolve = dir => require('path').join(__dirname, dir)
+console.log('utils', resolve('../src/utils'))
 module.exports = {
   entry: './src/index.js',
   output: {

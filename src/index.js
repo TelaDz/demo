@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { Provider } from 'react-redux'
@@ -9,12 +9,9 @@ import { Button } from 'antd'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Router history={createBrowserHistory()}>
-        <App />
-        <Button>测试按钮</Button>
-      </Router>
-    </Suspense>
+    <Router history={createBrowserHistory()}>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root')
 )

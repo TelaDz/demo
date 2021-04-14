@@ -8,7 +8,7 @@
     "start": "cross-env ENV_LWD=development webpack serve --mode=development --config script/webpack.config.dev.js",
     "build": "cross-env ENV_LWD=production webpack --mode=production --config script/webpack.config.pro.js",
     "serve": "npx serve -s dist",
-    "mock": "node mock/index.js",
+    "mock": "nodemon mock/index.js",
     "lint:css": "stylelint --aei .less .css src",
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
@@ -27,6 +27,7 @@
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
     "autoprefixer": "^10.2.5",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "babel-preset-mobx": "^2.0.0",
@@ -51,6 +52,7 @@
     "prettier": "^2.2.1",
     "purgecss-webpack-plugin": "^4.0.3",
     "purifycss-webpack": "^0.7.0",
+    "qs": "^6.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "style-loader": "^2.0.0",
@@ -73,8 +75,11 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix",
+      "prettier --write"
     ]
   }
 }

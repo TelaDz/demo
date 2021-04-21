@@ -23,7 +23,7 @@ const About = props => {
     // post('/api/num', value)
     let res = await request('/api/num', value)
     // let res = await request('/api/num', value, { method: 'get' })
-    console.log(res)
+    console.log('res', res)
     setUset(res)
   }
   return (

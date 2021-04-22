@@ -10,8 +10,8 @@ function removePendingRequest(config, cancel) {
   const key = config.url
   if (pendingRequest.has(key)) {
     cancel('重复请求')
-    // pendingRequest.delete(key)
-    console.log('pendingRequest', pendingRequest)
+  } else {
+    pendingRequest.delete(key)
   }
 }
 function addPendingRequest(config) {
@@ -28,10 +28,10 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   config => {
-    config.cancelToken = new CancelToken(function executor(c) {
-      removePendingRequest(config, c)
-    })
-    addPendingRequest(config)
+    // config.cancelToken = new CancelToken(function executor(c) {
+    //   removePendingRequest(config, c)
+    // })
+    // addPendingRequest(config)
     return config
   },
   error => {
@@ -43,11 +43,11 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   response => {
-    console.log('response', response)
-    const key = response.config.url
-    if (response.data) {
-      pendingRequest.delete(key)
-    }
+    // console.log('response', response)
+    // const key = response.config.url
+    // if (response.data) {
+    //   pendingRequest.delete(key)
+    // }
     return response.data
   },
   // 对响应数据做点什么

@@ -20,30 +20,38 @@ router.get('/:otehr', function (ctx, next) {
   //     msg:'null'
   // })
 })
-//设置增加add接口
-router.post('/add', async function (ctx, next) {
+
+router.post('/create', async function (ctx, next) {
   console.log(ctx.request.body)
-  const new2 = await Model.create(ctx.request.body)
-  //   ctx.body = {
-  //     code: 200,
-  //     data: new2
-  //   }
+  console.log(typeof ctx.request.body)
+  await Model.create(ctx.request.body)
+
   ctx.success({
-    new2
+    msg: '成功'
   })
+})
+router.post('/add', async (ctx, next) => {
+  try {
+    const ret = await Model.create(ctx.request.body)
+    ctx.body = { ret: ret.toJSON() }
+  } catch (err) {
+    ctx.body = { err }
+  }
 })
 //设置查询find接口
 router.post('/find', async function (ctx, next) {
-  const new2 = await Model.findAll({ include: [] })
-  ctx.body = {
-    code: 200,
-    data: new2
+  try {
+    const ret = await Model.findAll()
+    ctx.body = { ret: ret.toJSON() }
+    console.log(JSON.stringify(users, null, 2))
+  } catch (err) {
+    ctx.body = { err }
   }
 })
+//INSERT INTO `mysql2`.`antos` (`id`, `name`, `age`, `createdAt`, `updatedAt`) VALUES (17, '123', 123, '2021-04-22 07:53:20', '2021-04-22 07:53:20');
+
 //设置通过id得到所需信息的get接口
 router.post('/get', async function (ctx, next) {
-  // let users = await User.
-  // find({})
   console.log(ctx.request.body)
 
   let new2 = await Model.findOne({
@@ -52,35 +60,21 @@ router.post('/get', async function (ctx, next) {
       id: ctx.request.body.id
     }
   })
-  ctx.body = {
-    code: 200,
-    data: new2
-  }
 })
 //设置修改update接口
 router.post('/update', async function (ctx, next) {
-  console.log(ctx.request.body)
-  // let pbj = await Model.update({ _id: ctx.request.body._id }, ctx.request.body);
-
   let new2 = await Model.update(ctx.request.body, {
     where: {
       id: ctx.request.body.id
     }
   })
-  ctx.body = new2
 })
 //设置删除delete接口
 router.post('/delete', async function (ctx, next) {
-  console.log(ctx.request.body)
   // 删除所有名为 "Jane" 的人
   await Model.destroy({
     where: { id: ctx.request.body.id }
   })
-  ctx.body = 'shibai '
 })
 
-// //每次启动server刷新数据库
-//  (async ()=>{
-//   await sequelize.sync({ force: true });
-//  })()
 module.exports = router

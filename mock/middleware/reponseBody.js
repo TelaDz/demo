@@ -26,7 +26,7 @@ function routerResponse(option = {}) {
         msg: msg || option.successMsg || 'fail'
       }
     }
-    next()
+    // next()
   }
 }
 

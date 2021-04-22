@@ -21,25 +21,35 @@ const About = props => {
   ]
   const onFinish = async value => {
     // post('/api/num', value)
-    let res = await request('/api/num', value)
-    // let res = await request('/api/num', value, { method: 'get' })
+    let res = await request('/api/add', value)
     console.log('res', res)
-    setUset(res)
+  }
+
+  const get = async value => {
+    // post('/api/num', value)
+    let res = await request('/api/get')
+    console.log('res', res)
+  }
+  const find = async value => {
+    // post('/api/num', value)
+    let res = await request('/api/find')
+    console.log('res', res)
   }
   return (
     <>
       <Form onFinish={onFinish}>
-        <Form.Item name="userName" label="userName">
+        <Form.Item name="name" label="name">
           <Input></Input>
         </Form.Item>
-        <Form.Item name="nickName" label="nickName">
+        <Form.Item name="age" label="age">
           <Input></Input>
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit">submit</Button>
         </Form.Item>
       </Form>
-      <Button>{user?.userName}</Button>
+      <Button onClick={get}>get</Button>
+      <Button onClick={find}>find</Button>
       <Button>{user?.nickName}</Button>
       <Table columns={columns} dataSource={dataSource}></Table>
       {/* <Button

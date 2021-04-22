@@ -1,17 +1,14 @@
 const { Sequelize, DataTypes, Model } = require('sequelize')
 const sequelize = require('../mysql')
-const new2 = sequelize.define(
-  't_new2',
-  {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
-  },
-  {
-    // 这是其他模型参数
-    freezeTableName: true
-  }
-)
-// 定义的模型是类本身
-module.exports = new2
+// const sequelize = new Sequelize("sqlite::memory:");
+const Anto = sequelize.define('anto', {
+  name: DataTypes.TEXT,
+  age: DataTypes.INTEGER
+})
+;(async () => {
+  //   User.sync() - 如果表不存在,则创建该表(如果已经存在,则不执行任何操作)
+  // User.sync({ force: true }) - 将创建表,如果表已经存在,则将其首先删除
+  // User.sync({ alter: true }) - 这将检查数据库中表的当前状态(它具有哪些列,它们的数据类型等),然后在表中进行必要的更改以使其与模型匹配.
+  await sequelize.sync({ alter: true })
+})()
+module.exports = Anto

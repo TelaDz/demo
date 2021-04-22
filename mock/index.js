@@ -13,6 +13,15 @@ const reponseBody = require('./middleware/reponseBody')
 // })
 const app = new Koa()
 app.use(bodyParser())
+function formatError(err) {
+  return {
+    code: coerr.status,
+    msg: err.message
+  }
+}
+
+app.use(error(formatError))
+
 app.use(error())
 app.use(json())
 app.use(async (ctx, next) => {
@@ -28,24 +37,9 @@ app.use(async (ctx, next) => {
     ctx.set('X-Response-Time', `${ms}ms`)
   }, 1000)
 })
-app.use(reponseBody())
-
-// app.use(async ctx => {
-//   const reply = {
-//     code: 200,
-//     message: 'OK',
-//     data: ctx.request.body
-//   }
-//   const value = {
-//     httpOnly: true
-//   }
-//   ctx.cookies.set('token', value)
-//   ctx.body = reply
-// })
-
+// app.use(reponseBody())
 const new2 = require('./routes/new2')
 app.use(new2.routes(), new2.allowedMethods())
-
 app.on('error', function (err, ctx) {
   console.error('server error', err, ctx)
 })

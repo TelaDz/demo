@@ -3,9 +3,9 @@ import { Button, Table, Form, Input } from 'antd'
 // import { post } from 'utils/mAxios.js'
 // import request from 'utils/request.js'
 import request from 'utils/requestcancelToken.js'
-
+import { connect } from 'react-redux'
 const About = props => {
-  // console.log('About', props)
+  console.log('About props', props)
   const [user, setUset] = useState()
   const columns = [
     {
@@ -50,6 +50,38 @@ const About = props => {
       </Form>
       <Button onClick={get}>get</Button>
       <Button onClick={find}>find</Button>
+      <Button
+        onClick={() => {
+          props.dispatch({
+            type: 'ADD_USER',
+            userInfo: {
+              name: 'zhangpeng',
+              age: 16
+            }
+          })
+        }}
+      >
+        ADD_USER
+      </Button>
+      <Button
+        onClick={() => {
+          props.dispatch({
+            type: 'DELETE_USER',
+          })
+        }}
+      >
+        DELETE_USER
+      </Button>
+      <Button
+        onClick={() => {
+          props.dispatch({
+            type: 'OTHER',
+          })
+        }}
+      >
+        OTHER
+      </Button>
+      
       <Button>{user?.nickName}</Button>
       <Table columns={columns} dataSource={dataSource}></Table>
       {/* <Button
@@ -69,4 +101,15 @@ const About = props => {
     </>
   )
 }
-export default About
+const mapStateToProps = (state, ownProps) => {
+  return {
+    global: state.global
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatch
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(About)
+// export default connect()(About)

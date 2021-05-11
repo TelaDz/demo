@@ -1,13 +1,15 @@
 import { lazy } from 'react'
 
-const About = lazy(() => import('../pages/about'))
+const lazyComponen = path => {
+  return lazy(() => import('../pages' + path))
+}
 
 const routerMap = [
-    {
-        path: '/about',
-        name: 'About',
-        component: About,
-        auth: false
-    }
+  {
+    path: '/about',
+    name: 'About',
+    component: lazyComponen('/about'),
+    auth: false
+  }
 ]
 export default routerMap

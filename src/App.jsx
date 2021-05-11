@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Routers from './routers'
+import Routers from './routers/router'
 import 'antd/dist/antd.css'
 import { Link } from 'react-router-dom'
 
@@ -15,20 +15,7 @@ const App = props => {
     <Layout style={{ height: '100vh' }}>
       <Header className="header"></Header>
       <Layout>
-        <Sider
-          width={200}
-          style={
-            {
-              // height: '100vh',
-              // overflow: 'auto',
-              // position: 'fixed',
-              // left: 0
-            }
-          }
-          // breakpoint="lg"
-          // collapsedWidth="0"
-          className="site-layout-background"
-        >
+        <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
             defaultSelectedKeys={['1']}
@@ -37,16 +24,16 @@ const App = props => {
           >
             <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
               <Menu.Item key="1">
-                <Link to="/">home</Link>{' '}
+                <Link to="/">home</Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to="/other">other</Link>{' '}
+                <Link to="/other">other</Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <Link to="/about">about</Link>{' '}
+                <Link to="/about">about</Link>
               </Menu.Item>
               <Menu.Item key="4">
-                <Link to="/">option4</Link>{' '}
+                <Link to="/">option4</Link>
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Provider } from 'react-redux'
 import store from './redux/index'
-import { Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { Button } from 'antd'
 

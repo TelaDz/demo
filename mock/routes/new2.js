@@ -35,12 +35,17 @@ router.post('/add', async (ctx, next) => {
     const ret = await Model.create(ctx.request.body)
     ctx.body = { ret: ret.toJSON() }
   } catch (err) {
+<<<<<<< HEAD
     ctx.body = err
+=======
+    ctx.body = { err }
+>>>>>>> main
   }
 })
 //设置查询find接口
 router.post('/find', async function (ctx, next) {
   try {
+<<<<<<< HEAD
     // const ret = await Model.findAll({
     //   attributes: ['name', 'age']
     // })
@@ -50,6 +55,11 @@ router.post('/find', async function (ctx, next) {
     console.log(users.every(user => user instanceof Model)) // true
     console.log('All users:', JSON.stringify(users, null, 2))
     ctx.body = { data: JSON.stringify(users, null, 2) }
+=======
+    const ret = await Model.findAll()
+    ctx.body = { ret: ret.toJSON() }
+    console.log(JSON.stringify(users, null, 2))
+>>>>>>> main
   } catch (err) {
     ctx.body = { err }
   }

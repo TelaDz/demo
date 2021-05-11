@@ -1,0 +1,9 @@
+[remote "origin"]
+	url = git@gitee.com:Tela/demo.git
+	fetch = +refs/heads/*:refs/remotes/gitee/*
+[remote "origin"]
+	url = git@106.75.246.96:openproject/demo.git
+	fetch = +refs/heads/*:refs/remotes/gitlab/*
+[remote "origin"]
+	url = git@github.com:TelaDz/demo.git
+	fetch = +refs/heads/*:refs/remotes/github/*

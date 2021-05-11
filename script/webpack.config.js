@@ -16,11 +16,8 @@ module.exports = {
   },
   module: {
     rules: [
-<<<<<<< HEAD
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
-=======
->>>>>>> main
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -83,13 +80,10 @@ module.exports = {
     //   },
     // })
   ],
-<<<<<<< HEAD
   // externals: {
   //   react: 'react',
   //   'react-dom': 'ReactDOM'
   // },
-=======
->>>>>>> main
   resolve: {
     alias: {
       src: resolve('../src'),
@@ -98,11 +92,7 @@ module.exports = {
       utils: resolve('../src/utils')
     },
     // 需要打包的文件后缀
-<<<<<<< HEAD
     // extensions: ['.js', '.jsx']
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
-=======
-    extensions: ['.js', '.jsx']
->>>>>>> main
   }
 }

@@ -13,10 +13,6 @@ const reponseBody = require('./middleware/reponseBody')
 // })
 const app = new Koa()
 app.use(bodyParser())
-<<<<<<< HEAD
-
-app.use(error())
-=======
 function formatError(err) {
   return {
     code: coerr.status,
@@ -25,7 +21,6 @@ function formatError(err) {
 }
 
 app.use(error(formatError))
->>>>>>> main
 
 app.use(error())
 app.use(json())
@@ -43,19 +38,10 @@ app.use(async (ctx, next) => {
   }, 1000)
 })
 // app.use(reponseBody())
-<<<<<<< HEAD
-const modal = require('./routes/modal')
-app.use(modal.routes(), modal.allowedMethods())
-=======
 const new2 = require('./routes/new2')
 app.use(new2.routes(), new2.allowedMethods())
->>>>>>> main
 app.on('error', function (err, ctx) {
   console.error('server error', err, ctx)
 })
 
 app.listen(3000)
-<<<<<<< HEAD
-25645645645646545646                                                      
-=======
->>>>>>> main

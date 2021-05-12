@@ -10,6 +10,7 @@ module.exports = {
     '**/*.mp3',
     '**/*.json'
   ],
+  ignoreFiles: ['mock/**/*.*', 'dist/**/*.*'],
   rules: {
     'at-rule-no-unknown': [
       true,

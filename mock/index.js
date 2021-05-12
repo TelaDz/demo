@@ -19,6 +19,7 @@ function formatError(err) {
     msg: err.message
   }
 }
+app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(error(formatError))
 

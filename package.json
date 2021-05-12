@@ -9,7 +9,7 @@
     "build": "cross-env ENV_LWD=production webpack --mode=production --config script/webpack.config.pro.js",
     "serve": "npx serve -s dist",
     "mock": "nodemon mock/index.js",
-    "lint:css": "stylelint --aei .less .css src",
+    "lint:css": "stylelint .less .css src",
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/react": "^17.0.5",
     "autoprefixer": "^10.2.5",
     "awesome-typescript-loader": "^5.2.1",
     "axios": "^0.21.1",
@@ -71,7 +72,6 @@
     "webpack-parallel-uglify-plugin": "^2.0.0"
   },
   "dependencies": {
-    "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
     "antd": "^4.13.1",
     "history": "^5.0.0",

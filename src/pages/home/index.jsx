@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'antd'
+import routerMap from '../../routers/routerMap'
 
 const Home = props => {
   console.log('Home', props)

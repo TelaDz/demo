@@ -15,8 +15,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+      { test: /\.(tsx|ts)?$/, use: ['ts-loader'], exclude: /node_modules/ },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -44,6 +43,20 @@ module.exports = {
           }
         ]
       },
+      //处理图片资源
+      {
+        test: /\.(png|jpe?g|jpg|gif|woff|eot|ttf|svg)/,
+        use: [
+          // 对非文本文件采用file-loader加载
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024 * 30, // 30KB以下的文件
+              name: 'images/[name].[hash:8].[ext]'
+            }
+          }
+        ]
+      },
       {
         test: /\.(png|svg|jpg|gif|jpeg)$/,
         loader: 'file-loader'
@@ -51,7 +64,9 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader'
-      }
+      },
+      // { test: /src\/pages(\/.*).(tsx|ts)/, loader: 'bundle-loader?lazy!ts-loader' },
+      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
   },
   plugins: [
@@ -61,6 +76,7 @@ module.exports = {
     // new ExtractTextPlugin('css/index.css'),
     //提供全局的变量，在模块中使用无需用require引入
     new webpack.ProvidePlugin({
+      React: 'react',
       React: 'react'
     }),
     // new webpack.DllReferencePlugin({
@@ -92,6 +108,7 @@ module.exports = {
     },
     // 需要打包的文件后缀
     // extensions: ['.js', '.jsx']
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json']
+    // modules: [path.resolve(__dirname, 'node_modules')]y
   }
 }

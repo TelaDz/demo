@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 interface PropsType {
-  about: 'text'
+  title: string
 }
 
 const About = (props: PropsType) => {
-  return <></>
+  return <>About</>
 }
 export default About

@@ -8,7 +8,7 @@
 
 */
 
-function routerResponse(option = {}) {
+function reponseBody(option = {}) {
   return function (ctx, next) {
     ctx.success = function (data) {
       ctx.type = option.type || 'json'
@@ -26,8 +26,8 @@ function routerResponse(option = {}) {
         msg: msg || option.successMsg || 'fail'
       }
     }
-    // next()
+    next()
   }
 }
 
-module.exports = routerResponse
+module.exports = reponseBody

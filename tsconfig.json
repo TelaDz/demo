@@ -4,7 +4,8 @@
       "sourceMap": true,
       "noImplicitAny": true,
       "module": "system",
-      "target": "es6",
+      "target": "es5",
+      "importHelpers":true, // 减少辅助函数的输出 缩小压缩后的代码体积
       "jsx": "react"
   },
   "include": [

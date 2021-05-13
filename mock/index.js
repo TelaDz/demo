@@ -7,23 +7,33 @@ const json = require('koa-json')
 const util = require('util')
 const dns = require('dns')
 const reponseBody = require('./middleware/reponseBody')
+const reponseOptions = require('./middleware/reponseOptions')
 
 // dns.lookup('example.org', (err, address, family) => {
 //   console.log('地址: %j 地址族: IPv%s', address, family)
 // })
-const app = new Koa()
-app.use(bodyParser())
 function formatError(err) {
+  console.log('err->', err)
   return {
-    code: coerr.status,
-    msg: err.message
+    code: err.status,
+    msg: err.message,
+    success: false
   }
 }
+const app = new Koa()
+
+app.use(bodyParser())
+app.use(reponseOptions)
+
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(error(formatError))
+app.use(
+  error({
+    preFormat: null,
+    format: formatError
+  })
+)
 
-app.use(error())
 app.use(json())
 app.use(async (ctx, next) => {
   await next()
@@ -38,9 +48,9 @@ app.use(async (ctx, next) => {
     ctx.set('X-Response-Time', `${ms}ms`)
   }, 1000)
 })
-// app.use(reponseBody())
-const new2 = require('./routes/new2')
-app.use(new2.routes(), new2.allowedMethods())
+const menuList = require('./routes/menuList')
+app.use(menuList.routes(), menuList.allowedMethods())
+app.use(reponseBody())
 app.on('error', function (err, ctx) {
   console.error('server error', err, ctx)
 })

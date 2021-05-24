@@ -23,10 +23,16 @@ const routerMap = [
     component: lazyComponen('/menu'),
     auth: false
   },
+  // {
+  //   path: '/otehr',
+  //   name: 'Other',
+  //   component: lazyComponen('/other/index.tsx'),
+  //   auth: false
+  // },
   {
-    path: '/otehr',
-    name: 'Other',
-    component: lazyComponen('/other/index.tsx'),
+    path: '/copy',
+    name: 'Copy',
+    component: lazyComponen('/copy'),
     auth: false
   }
 ]

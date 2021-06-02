@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Table, Form, Input } from 'antd'
-// import { post } from 'utils/mAxios.js'
-// import request from 'utils/request.js'
 import request from 'utils/requestcancelToken.js'
 import { connect } from 'react-redux'
 const About = props => {
@@ -20,14 +18,15 @@ const About = props => {
     }
   ]
   const onFinish = async value => {
-    // post('/api/num', value)
-    let res = await request('/api/add', value)
-    console.log('res', res)
+    let res = await request('/api/users', value)
   }
-
+  // const onFinish = async value => {
+  //   let res = await request('/api/user/index',{},{method:'get'})
+  //   console.log('res', res)
+  // }
   const get = async value => {
     // post('/api/num', value)
-    let res = await request('/api/get')
+    let res = await request('/api/users')
     console.log('res', res)
   }
   const find = async value => {
@@ -42,10 +41,10 @@ const About = props => {
           <Input></Input>
         </Form.Item>
         <Form.Item name="age" label="age">
-          <Input></Input>
+          <Input type="number"></Input>
         </Form.Item>
         <Form.Item>
-          <Button htmlType="submit">submit</Button>
+          <Button htmlType="submit">提交内容</Button>
         </Form.Item>
       </Form>
       <Button onClick={get}>get</Button>
@@ -66,7 +65,7 @@ const About = props => {
       <Button
         onClick={() => {
           props.dispatch({
-            type: 'DELETE_USER',
+            type: 'DELETE_USER'
           })
         }}
       >
@@ -75,13 +74,13 @@ const About = props => {
       <Button
         onClick={() => {
           props.dispatch({
-            type: 'OTHER',
+            type: 'OTHER'
           })
         }}
       >
         OTHER
       </Button>
-      
+
       <Button>{user?.nickName}</Button>
       <Table columns={columns} dataSource={dataSource}></Table>
       {/* <Button

@@ -15,7 +15,6 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(tsx|ts)?$/, use: ['ts-loader'], exclude: /node_modules/ },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -76,7 +75,6 @@ module.exports = {
     // new ExtractTextPlugin('css/index.css'),
     //提供全局的变量，在模块中使用无需用require引入
     new webpack.ProvidePlugin({
-      React: 'react',
       React: 'react'
     }),
     // new webpack.DllReferencePlugin({

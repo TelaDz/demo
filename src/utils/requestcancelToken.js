@@ -5,7 +5,7 @@ import { baseURL } from './env.js'
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 const pendingRequest = new Map()
-
+const Cookies = require('js-cookie')
 function removePendingRequest(config, cancel) {
   const key = config.url
   if (pendingRequest.has(key)) {
@@ -20,10 +20,12 @@ function addPendingRequest(config) {
   const value = [method, qs.stringify(data)].join('&')
   pendingRequest.set(key, value)
 }
+var csrftoken = Cookies.get('csrfToken')
 const instance = axios.create({
-  timeout: 5000,
+  timeout: 50000,
   baseURL,
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json', 'x-csrf-token': csrftoken }
+  // headers: { 'x-csrf-token': csrftoken }
 })
 // 添加请求拦截器
 instance.interceptors.request.use(
@@ -32,6 +34,8 @@ instance.interceptors.request.use(
     //   removePendingRequest(config, c)
     // })
     // addPendingRequest(config)
+
+    console.log('config', config)
     return config
   },
   error => {

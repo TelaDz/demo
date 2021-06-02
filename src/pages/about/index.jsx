@@ -20,10 +20,6 @@ const About = props => {
   const onFinish = async value => {
     let res = await request('/api/users', value)
   }
-  // const onFinish = async value => {
-  //   let res = await request('/api/user/index',{},{method:'get'})
-  //   console.log('res', res)
-  // }
   const get = async value => {
     // post('/api/num', value)
     let res = await request('/api/users')

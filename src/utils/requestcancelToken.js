@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd'
 import qs from 'qs'
-import { baseURL } from './env.js'
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 const pendingRequest = new Map()
@@ -23,7 +22,6 @@ function addPendingRequest(config) {
 var csrftoken = Cookies.get('csrfToken')
 const instance = axios.create({
   timeout: 50000,
-  baseURL,
   headers: { 'Content-Type': 'application/json', 'x-csrf-token': csrftoken }
   // headers: { 'x-csrf-token': csrftoken }
 })

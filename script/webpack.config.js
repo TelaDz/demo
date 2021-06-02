@@ -74,14 +74,8 @@ module.exports = {
     new webpack.ProgressPlugin(),
     // new ExtractTextPlugin('css/index.css'),
     //提供全局的变量，在模块中使用无需用require引入
-    new webpack.ProvidePlugin({
-      React: 'react'
-    }),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('./manifest.json'),
-    //   scope: 'xyz',
-    //   sourceType: 'commonjs2',
+    // new webpack.ProvidePlugin({
+    //   react: 'react'
     // }),
     new webpack.DefinePlugin({ DESCRIPTION: 'This Is The Test Text.' }) //定义一些全局的变量
     // new CopyPlugin({
@@ -94,8 +88,16 @@ module.exports = {
     // })
   ],
   // externals: {
-  //   react: 'react',
-  //   'react-dom': 'ReactDOM'
+  //   react: {
+  //     commonjs: 'react',
+  //     amd: 'react',
+  //     root: 'React' // 指向全局变量
+  //   },
+  //   'react-dom': {
+  //     commonjs: 'react-dom',
+  //     amd: 'react-dom',
+  //     root: 'ReactDOM' // 指向全局变量
+  //   },
   // },
   resolve: {
     alias: {

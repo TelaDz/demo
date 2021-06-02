@@ -21,18 +21,20 @@ const routerMap = [
     path: '/menu',
     name: 'Menu',
     component: lazyComponen('/menu'),
-    auth: false
+    auth: false,
+    children: [
+      {
+        path: '/menu/create',
+        name: 'MenuCreate',
+        component: lazyComponen('/menu/create'),
+        auth: false
+      }
+    ]
   },
   {
     path: '/otehr',
     name: 'Other',
     component: lazyComponen('/other'),
-    auth: false
-  },
-  {
-    path: '/copy',
-    name: 'Copy',
-    component: lazyComponen('/copy'),
     auth: false
   }
 ]

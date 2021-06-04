@@ -1,16 +1,15 @@
 const { merge } = require('webpack-merge')
 const comWebpackConfig = require('./webpack.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CompressionPlugin = require('compression-webpack-plugin') //生成gizp
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const glob = require('glob')
 const PurgeCSSPlugin = require('purgecss-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
-// const manifest = require('../dist/vendor-manifest.json')
 const PATHS = {
   src: path.join(__dirname, '../src')
 }
+console.log('PATHS', PATHS)
 const proConfig = merge(comWebpackConfig, {
   plugins: [
     new MiniCssExtractPlugin({
@@ -19,23 +18,6 @@ const proConfig = merge(comWebpackConfig, {
     new PurgeCSSPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('./manifest.json'),
-    //   scope: 'xyz',
-    //   sourceType: 'commonjs2'
-    // })
-    // new CompressionPlugin({
-    //   gzip压缩配置
-    //   test: /\.js(\?.*)?$/i,
-    //   threshold: 10240, // 对超过10kb的数据进行压缩
-    //   filename: "[path][base].gz",
-    //   exclude: /.map$/,
-    //   deleteOriginalAssets: 'keep-source-map',
-    //   deleteOriginalAssets: true // 是否删除原文件
-    // }),
-    // new webpack.NoEmitOnErrorsPlugin()//忽略警告
-    // new webpack.DllReferencePlugin({  manifest: require('../dist/vendor-manifest.json'),})
   ],
   module: {
     rules: [
@@ -49,10 +31,11 @@ const proConfig = merge(comWebpackConfig, {
     minimize: true,
     minimizer: [
       // 压缩css
-      new OptimizeCSSAssetsPlugin({}),
+      // new OptimizeCSSAssetsPlugin({}),
+      new CssMinimizerPlugin(),
       new TerserPlugin({
         parallel: 4,
-        // test: /\.js(\?.*)?$/i,
+        extractComments: false,
         terserOptions: {
           ecma: undefined,
           warnings: false,
@@ -77,18 +60,28 @@ const proConfig = merge(comWebpackConfig, {
           safari10: false
         }
       })
-    ]
-    // splitChunks: {
-    //   cacheGroups: {
-    //     styles: {
-    //       name: 'styles',
-    //       test: /\.css$/,
-    //       chunks: 'all',
-    //       enforce: true
-    //     }
-    //   }
-    // }
-  }
+    ],
+    splitChunks: {
+      chunks: 'all',
+      // minSize: 20000,
+      // minRemainingSize: 0,
+      // minChunks: 1,
+      // maxAsyncRequests: 30,
+      // maxInitialRequests: 30,
+      // enforceSizeThreshold: 50000,
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          reuseExistingChunk: true
+        },
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  },
+  performance: false //配置如何展示性能提示
 })
-// console.log('proConfig', proConfig)
 module.exports = proConfig

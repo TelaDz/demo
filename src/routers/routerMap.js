@@ -7,33 +7,25 @@ const lazyComponen = path => {
 const routerMap = [
   {
     path: '/about',
-    name: 'About',
+    name: '关于',
     component: lazyComponen('/about'),
     auth: false
   },
   {
-    path: '/excel',
-    name: 'Excel',
-    component: lazyComponen('/excel'),
+    path: '/menu/index',
+    name: '菜单',
+    component: lazyComponen('/menu'),
     auth: false
   },
   {
-    path: '/menu',
-    name: 'Menu',
-    component: lazyComponen('/menu'),
-    auth: false,
-    children: [
-      {
-        path: '/menu/create',
-        name: 'MenuCreate',
-        component: lazyComponen('/menu/create'),
-        auth: false
-      }
-    ]
+    path: '/menu/create',
+    name: '菜单创建',
+    component: lazyComponen('/menu/create'),
+    auth: false
   },
   {
     path: '/otehr',
-    name: 'Other',
+    name: '其他',
     component: lazyComponen('/other'),
     auth: false
   }

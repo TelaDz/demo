@@ -11,7 +11,16 @@ const devConfig = merge(comWebpackConfig, {
     open: true,
     historyApiFallback: true,
     compress: true,
-    proxy: configDevProxy
+    port: 9000,
+    // proxy: configDevProxy
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' }
+      }
+    }
   },
   devtool: 'source-map',
   plugins: [new webpack.HotModuleReplacementPlugin()]

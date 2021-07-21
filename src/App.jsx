@@ -8,7 +8,7 @@ import { Layout, Menu, Breadcrumb } from 'antd'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons'
 import './App.less'
 import routerMap from './routers/routerMap'
-
+import { hot } from 'react-hot-loader/root'
 const { SubMenu } = Menu
 const { Header, Content, Sider } = Layout
 const App = props => {
@@ -55,11 +55,11 @@ const App = props => {
     </Layout>
   )
 }
-const mapStateToProps = (state /*, ownProps*/) => {
-  return {
-    // counter: state.counter
-  }
-}
+// const mapStateToProps = (state /*, ownProps*/) => {
+//   return {
+//     // counter: state.counter
+//   }
+// }
 
 // const mapDispatchToProps = dispatch => {
 //     return {
@@ -69,4 +69,4 @@ const mapStateToProps = (state /*, ownProps*/) => {
 //     }
 // }
 // export default connect(mapStateToProps, mapDispatchToProps)(App)
-export default connect(mapStateToProps)(App)
+export default hot(App)

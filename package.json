@@ -8,7 +8,6 @@
     "start": "cross-env ENV_LWD=development webpack serve --mode=development --config script/webpack.config.dev.js",
     "build": "cross-env ENV_LWD=production webpack --mode=production --config script/webpack.config.pro.js",
     "serve": "npx serve -s dist",
-    "mock": "nodemon mock/index.js",
     "lint:css": "stylelint .less .css src",
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
@@ -49,6 +48,7 @@
     "less-loader": "^8.0.0",
     "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^1.3.9",
+    "mockjs": "^1.1.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",
@@ -60,6 +60,7 @@
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
     "source-map-loader": "^2.0.1",
     "style-loader": "^2.0.0",
     "stylelint": "^13.12.0",
@@ -74,6 +75,7 @@
     "webpack-parallel-uglify-plugin": "^2.0.0"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
     "antd": "^4.13.1",
     "clipboard": "^2.0.8",
     "history": "^5.0.0",

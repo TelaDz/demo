@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 module.exports = {
-  entry: './src/index.js',
+  entry: ['react-hot-loader/patch', './src'],
   output: {
     // 指定打包后输出的文件名
     filename: '[name].[contenthash].js',
@@ -80,6 +80,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       pages: path.resolve(__dirname, '../src/pages'),
       utils: path.resolve(__dirname, '../src/utils')
     },

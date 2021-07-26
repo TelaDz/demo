@@ -1,7 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const CopyPlugin = require('copy-webpack-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// const TerserPlugin = require('terser-webpack-plugin')
+
 const webpack = require('webpack')
 module.exports = {
   entry: ['react-hot-loader/patch', './src'],
@@ -10,7 +14,8 @@ module.exports = {
     filename: '[name].[contenthash].js',
     // 指定打包后输出的目录
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/'
+    publicPath: '/',
+    clean: true
   },
   module: {
     rules: [
@@ -68,15 +73,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ title: 'demo', template: 'public/index.html' }),
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({ DESCRIPTION: 'This Is The Test Text.' }) //定义一些全局的变量
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: path.resolve(__dirname, '../assest'), to: path.resolve(__dirname, '../dist') }
-    //   ]
-    // })
   ],
   resolve: {
     alias: {

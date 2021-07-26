@@ -30,8 +30,6 @@ const proConfig = merge(comWebpackConfig, {
   optimization: {
     minimize: true,
     minimizer: [
-      // 压缩css
-      // new OptimizeCSSAssetsPlugin({}),
       new CssMinimizerPlugin(),
       new TerserPlugin({
         parallel: 4,
@@ -47,7 +45,6 @@ const proConfig = merge(comWebpackConfig, {
           },
           mangle: true, // Note `mangle.properties` is `false` by default.
           module: false,
-          // Deprecated
           output: {
             comments: false
           },
@@ -63,22 +60,32 @@ const proConfig = merge(comWebpackConfig, {
     ],
     splitChunks: {
       chunks: 'all',
-      // minSize: 20000,
+      minSize: 30000,
       // minRemainingSize: 0,
       // minChunks: 1,
       // maxAsyncRequests: 30,
       // maxInitialRequests: 30,
       // enforceSizeThreshold: 50000,
       cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        },
         commons: {
           name: 'commons',
           reuseExistingChunk: true
-        },
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
         }
+        // vendor: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name: 'vendor',
+        //   chunks: 'all'
+        // }
       }
     }
   },

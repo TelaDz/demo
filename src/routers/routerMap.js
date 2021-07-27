@@ -24,9 +24,15 @@ const routerMap = [
     auth: false
   },
   {
-    path: '/otehr',
+    path: '/other',
     name: '其他',
     component: lazyComponen('/other'),
+    auth: false
+  },
+  {
+    path: '/echarts',
+    name: '地图',
+    component: lazyComponen('/echarts'),
     auth: false
   }
 ]

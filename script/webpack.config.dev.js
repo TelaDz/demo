@@ -11,7 +11,7 @@ const devConfig = merge(comWebpackConfig, {
     open: true,
     historyApiFallback: true,
     compress: true,
-    port: 9000,
+    port: 8888,
     // proxy: configDevProxy
     proxy: {
       '/api': {

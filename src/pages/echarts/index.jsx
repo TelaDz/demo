@@ -1,45 +1,64 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Button, Table, Form, Input } from 'antd'
+import { useHistory, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as echarts from 'echarts'
-// import 'echarts/map/js/china.js' // 引入中国地图数据
-import option from './echarts1'
-// import geoJSON from './100000_full.json'
-import geoJSON from 'lib/map/js/data.js'
+// import option from './echarts1'
+import { optionRegion } from './option'
+import geoJSON from 'lib/map/js/china.js'
 import axios from 'utils'
-
+echarts.registerMap('china', { geoJSON: geoJSON.china })
+const area = Object.keys(geoJSON)
+let myChart
+var res = [
+  {
+    name: '上海',
+    value: [121.48, 31.22],
+    sub: 20
+  }
+]
 const Echarts = props => {
-  console.log('Echarts props', props)
   const echartsDiv = useRef(null)
-
-  const getJson = async () => {
-    // let res = await axios('/api/data', {}, { method: 'get' })
-    const parme = {
-      url: '/api/data',
-      method: 'get'
+  const [currentArea, setCurrentArea] = useState('china')
+  const history = useHistory()
+  useEffect(() => {
+    initEcharts()
+    return () => {
+      myChart.dispose()
     }
-    let res = await axios(parme)
-    // echarts.registerMap('china', { geoJSON })
-    console.log(res)
-    let myChart = echarts.init(echartsDiv.current)
+  }, [])
+  const initEcharts = (name = 'china') => {
+    myChart = echarts.init(echartsDiv.current)
+    const option = optionRegion(name, res)
+    myChart.resize()
+    myChart.on('click', 'geo', e => {
+      // myChart.on('click', e => {
+      console.log('e', e)
+      if (area.includes(e.name)) {
+        setCurrentArea(e.name)
+        updataMap(e.name)
+      }
+    })
     myChart.setOption(option)
   }
-
-  useEffect(() => {
-    console.log(geoJSON)
-    echarts.registerMap('china', { geoJSON })
-    let myChart = echarts.init(echartsDiv.current)
-    myChart.setOption(option)
-  }, [])
-  useEffect(() => {
-    let myChart = echarts.init(echartsDiv.current)
-    myChart.on('click', e => {
-      console.log('e', e)
-    })
-  })
+  const updataMap = name => {
+    myChart.dispose()
+    echarts.registerMap(name, { geoJSON: geoJSON[name] })
+    initEcharts(name)
+  }
   return (
     <>
       <div id="main" ref={echartsDiv} style={{ width: 600, height: 500 }}></div>
+      {currentArea !== 'china' ? (
+        <Button
+          onClick={() => {
+            updataMap('china')
+            setCurrentArea('china')
+          }}
+        >
+          返回
+        </Button>
+      ) : null}
     </>
   )
 }
@@ -54,3 +73,28 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Echarts)
+// const getJson = async () => {
+//   // let res = await axios('/api/data', {}, { method: 'get' })
+//   const parme = {
+//     url: '/api/data',
+//     method: 'get'
+//   }
+//   let res = await axios(parme)
+//   // echarts.registerMap('china', { geoJSON })
+//   console.log(res)
+//   let myChart = echarts.init(echartsDiv.current)
+//   myChart.setOption(option)
+// }
+// myChart.on('click', 'geo', e => {
+// myChart.on('click', e => {
+//   setName(e.name)
+//   if (names.includes(e.name)) {
+//     myChart.clear()
+//     echarts.registerMap(e.name, { geoJSON: geoJSON[e.name] })
+//   }
+// })
+// const setMap = (region = 'china') => {
+//   myChart.dispose()
+//   echarts.registerMap('china', { geoJSON: geoJSON[region] })
+//   initEcharts()
+// }

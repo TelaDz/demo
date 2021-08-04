@@ -1,3 +1,5 @@
+import * as echarts from 'echarts'
+
 var option
 
 var data = [
@@ -241,12 +243,7 @@ var geoCoordMap = {
   武汉: [114.31, 30.52],
   大庆: [125.03, 46.58]
 }
-var res = [
-  {
-    name: '上海',
-    value: [121.48, 31.22]
-  }
-]
+
 var convertData = function (data) {
   var res = []
   for (var i = 0; i < data.length; i++) {
@@ -273,12 +270,15 @@ option = {
   },
   geo: {
     map: 'china',
+    // zoom: 1.2,
     roam: true,
+    // silent: true,
     selectedMode: 'single',
     scaleLimit: {
       min: 1,
       max: 10
-    }
+    },
+    zlevel: 0
   },
   series: [
     {
@@ -310,6 +310,6 @@ option = {
     }
   ]
 }
-console.log('convertData(data)', convertData(data))
+// console.log('convertData(data)', convertData(data))
 export default option
 // option && myChart.setOption(option);

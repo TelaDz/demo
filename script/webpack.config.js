@@ -8,7 +8,12 @@ const path = require('path')
 
 const webpack = require('webpack')
 module.exports = {
-  entry: ['react-hot-loader/patch', './src'],
+  // entry: ['react-hot-loader/patch', './src'],
+  entry: {
+    main: './src',
+    vendor: ['antd', 'axios'],
+    react: ['react', 'react-dom', 'react-router-dom', 'redux']
+  },
   output: {
     // 指定打包后输出的文件名
     filename: '[name].[contenthash].js',

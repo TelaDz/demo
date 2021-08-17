@@ -3,9 +3,9 @@ import { Button, Table, Form, Input } from 'antd'
 import { useHistory, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as echarts from 'echarts'
-// import option from './echarts1'
 import { optionRegion } from './option'
-import geoJSON from 'lib/map/js/china.js'
+import geoJSON from './china.js'
+
 import axios from 'utils'
 echarts.registerMap('china', { geoJSON: geoJSON.china })
 const area = Object.keys(geoJSON)
@@ -17,10 +17,17 @@ var res = [
     sub: 20
   }
 ]
+var falt = [
+  {
+    name: '武汉',
+    value: [114.31, 30.52],
+    sub: 20
+  }
+]
 const Echarts = props => {
   const echartsDiv = useRef(null)
   const [currentArea, setCurrentArea] = useState('china')
-  const history = useHistory()
+  // const history = useHistory()
   useEffect(() => {
     initEcharts()
     return () => {
@@ -29,15 +36,25 @@ const Echarts = props => {
   }, [])
   const initEcharts = (name = 'china') => {
     myChart = echarts.init(echartsDiv.current)
-    const option = optionRegion(name, res)
+    const option = optionRegion(name, res, falt)
     myChart.resize()
     myChart.on('click', 'geo', e => {
       // myChart.on('click', e => {
-      console.log('e', e)
+      console.log('e1', e)
       if (area.includes(e.name)) {
         setCurrentArea(e.name)
         updataMap(e.name)
       }
+    })
+    myChart.on('click', 'series', e => {
+      // myChart.on('click', e => {
+      console.log('e2', e)
+    })
+    myChart.on('click', e => {
+      // myChart.on('click', e => {
+      console.log('e3', e)
+      const history = myChart.getOption()
+      console.log('history', history)
     })
     myChart.setOption(option)
   }

@@ -76,11 +76,11 @@ const proConfig = merge(comWebpackConfig, {
           minChunks: 2,
           priority: -20,
           reuseExistingChunk: true
-        },
-        commons: {
-          name: 'commons',
-          reuseExistingChunk: true
         }
+        // commons: {
+        //   name: 'commons',
+        //   reuseExistingChunk: true
+        // }
         // vendor: {
         //   test: /[\\/]node_modules[\\/]/,
         //   name: 'vendor',

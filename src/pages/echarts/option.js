@@ -1,4 +1,4 @@
-import geoJSON from 'lib/map/js/china.js'
+import geoJSON from './china.js'
 const area = Object.keys(geoJSON)
 const regions = area.map(item => ({ name: item }))
 const optionRegion = (region = 'china', normalData = [], faultData = []) => {
@@ -20,7 +20,7 @@ const optionRegion = (region = 'china', normalData = [], faultData = []) => {
       selectedMode: 'single',
       scaleLimit: {
         min: 1,
-        max: 10
+        max: 100
       },
       label: false,
       left: 'center',
@@ -35,7 +35,6 @@ const optionRegion = (region = 'china', normalData = [], faultData = []) => {
         type: 'scatter',
         coordinateSystem: 'geo',
         data: normalData,
-        hoverAnimation: true,
         itemStyle: {
           color: '#33FF00',
           shadowBlur: 10,
@@ -50,7 +49,6 @@ const optionRegion = (region = 'china', normalData = [], faultData = []) => {
         rippleEffect: {
           brushType: 'stroke'
         },
-        hoverAnimation: true,
         effectType: 'ripple',
         itemStyle: {
           color: 'red',

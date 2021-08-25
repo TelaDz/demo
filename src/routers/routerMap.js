@@ -45,6 +45,18 @@ const routes = [
     name: 'echarts',
     sidebar: () => <div>echarts!</div>,
     main: () => <div>{lazyComponent('/echarts')}</div>
+  },
+  // {
+  //   path: '/excel',
+  //   name: 'excel',
+  //   sidebar: () => <div>excel!</div>,
+  //   main: () => <div>{lazyComponent('/excel')}</div>
+  // },
+  {
+    path: '/canvas',
+    name: 'canvas',
+    sidebar: () => <div>canvas!</div>,
+    main: () => <div>{lazyComponent('/canvas')}</div>
   }
 ]
 export default routes

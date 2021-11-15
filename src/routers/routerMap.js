@@ -57,6 +57,18 @@ const routes = [
     name: 'canvas',
     sidebar: () => <div>canvas!</div>,
     main: () => <div>{lazyComponent('/canvas')}</div>
+  },
+  {
+    path: '/tab',
+    name: 'tab',
+    sidebar: () => <div>tab!</div>,
+    main: () => <div>{lazyComponent('/tab')}</div>
+  },
+  {
+    path: '/scroll',
+    name: 'scroll',
+    sidebar: () => <div>scroll!</div>,
+    main: () => <div>{lazyComponent('/scroll')}</div>
   }
 ]
 export default routes

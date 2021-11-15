@@ -28,3 +28,20 @@
 5. 确保您的密钥在“标题”文本框中包含描述性名称，例如“工作笔记本电脑”或“
 6. 家用工作站”。
 7. 在“过期时间”部分下包含密钥的（可选）过期日期。（在GitLab 12.9中引入。）
+
+
+npm config set registry https://registry.npm.taobao.org
+npm config set disturl https://npm.taobao.org/dist
+npm config set electron_mirror https://npm.taobao.org/mirrors/electron/
+npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
+npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/
+npm查看当前地址源：npm get registry
+
+yarn config set registry https://registry.npm.taobao.org -g
+yarn config set disturl https://npm.taobao.org/dist -g
+yarn config set electron_mirror https://npm.taobao.org/mirrors/electron/ -g
+yarn config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ -g
+yarn config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/ -g
+yarn config set chromedriver_cdnurl https://cdn.npm.taobao.org/dist/chromedriver -g
+yarn config set operadriver_cdnurl https://cdn.npm.taobao.org/dist/operadriver -g
+yarn config set fse_binary_host_mirror https://npm.taobao.org/mirrors/fsevents -gyarn查看当前地址源：yarn config get registry

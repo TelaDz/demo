@@ -1,0 +1,28 @@
+.tabs-style-pane {
+  & > .ant-tabs {
+    & > .ant-tabs-nav {
+      & > .ant-tabs-nav-wrap {
+        & > .ant-tabs-nav-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          & > .ant-tabs-tab {
+            // background-color: red;
+            // border: 1px solid #000;
+            border-radius: 0 25px 0 0;
+            // padding: ;
+            margin: 0;
+            margin-left: 0;
+          }
+          & > .ant-tabs-tab-active {
+            background-color: aquamarine;
+
+            & > .ant-tabs-tab-btn {
+              color: black;
+            }
+          }
+        }
+      }
+    }
+  }
+}

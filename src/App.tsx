@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from "react";
+import LoginView from "./pages/login";
+import { Button } from "antd";
+import "./App.css";
 
-function App() {
+const View = (props: any) => {
+  const [loginShow, setLoginShow] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      {!loginShow ? (
+        <Button
+          onClick={() => {
+            setLoginShow(true);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          登录
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            setLoginShow(false);
+          }}
+        >
+          隐藏
+        </Button>
+      )}
+      {loginShow && <LoginView></LoginView>}
     </div>
   );
-}
+};
+
+const App: FC = () => (
+  <div>
+    <View></View>
+  </div>
+);
 
 export default App;
